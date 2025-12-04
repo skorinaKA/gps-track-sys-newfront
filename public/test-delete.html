@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Delete API</title>
+</head>
+<body>
+    <h1>Test Delete User API</h1>
+    
+    <div>
+        <label>Login to delete: <input id="loginInput" value="testuser"></label>
+        <button onclick="testDelete()">Test DELETE</button>
+        <button onclick="testPost()">Test POST</button>
+    </div>
+    
+    <div id="result"></div>
+    
+    <script>
+        async function testDelete() {
+            const login = document.getElementById('loginInput').value;
+            const resultDiv = document.getElementById('result');
+            
+            try {
+                const response = await fetch('http://localhost:8088/delete/user', {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ login })
+                });
+                
+                resultDiv.innerHTML = `
+                    <p>Status: ${response.status}</p>
+                    <p>Status Text: ${response.statusText}</p>
+                    <p>Response: ${await response.text()}</p>
+                `;
+            } catch (error) {
+                resultDiv.innerHTML = `<p style="color:red">Error: ${error.message}</p>`;
+            }
+        }
+        
+        async function testPost() {
+            const login = document.getElementById('loginInput').value;
+            const resultDiv = document.getElementById('result');
+            
+            try {
+                const response = await fetch('http://localhost:8088/delete/user', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ login })
+                });
+                
+                resultDiv.innerHTML = `
+                    <p>Status: ${response.status}</p>
+                    <p>Status Text: ${response.statusText}</p>
+                    <p>Response: ${await response.text()}</p>
+                `;
+            } catch (error) {
+                resultDiv.innerHTML = `<p style="color:red">Error: ${error.message}</p>`;
+            }
+        }
+    </script>
+</body>
+</html>
