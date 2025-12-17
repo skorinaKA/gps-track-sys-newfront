@@ -31,6 +31,7 @@ import {
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 import RefreshIcon from '@mui/icons-material/Refresh';
+import { WavingHand } from '@mui/icons-material';
 
 const AdminPanel: React.FC = () => {
     const dispatch = useDispatch<AppDispatch>();

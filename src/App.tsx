@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { initWebVitals, trackPageView } from './services/metrics';
 import { RootState, AppDispatch } from './store';
 import { logout } from './slices/userSlice';
 import Login from './components/Login';
@@ -35,6 +36,10 @@ const ContentContainer = styled('div')({
 });
 
 const App: React.FC = () => {
+    useEffect(() => {
+        initWebVitals();
+        trackPageView(window.location.pathname);
+    }, []);
     const dispatch = useDispatch<AppDispatch>();
     const { currentUser } = useSelector((state: RootState) => state.user);
     const { devices } = useSelector((state: RootState) => state.devices);

@@ -145,7 +145,7 @@ deleteUser: async (login: string): Promise<void> => {
             return response.data.map(dbDevice => {
                 const coordinates = dbDevice.Coordinate || [];
                 const sortedCoords = coordinates.sort((a, b) => 
-                    new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()
+                    new Date(a.timestamp.slice(0, 19)).getTime() - new Date(b.timestamp.slice(0, 19)).getTime()
                 );
 
                 const curCoords = sortedCoords.length > 0 
@@ -160,9 +160,9 @@ deleteUser: async (login: string): Promise<void> => {
                     previousCoords,
                     previousCoordsStatus: sortedCoords.map(() => Status.Active),
                     lastActivity: sortedCoords.length > 0 
-                        ? sortedCoords[sortedCoords.length - 1].timestamp 
+                        ? sortedCoords[sortedCoords.length - 1].timestamp.slice(0, 19) 
                         : new Date().toISOString(),
-                    status: 'active'
+                    status: new Date().getTime() - Date.parse(dbDevice.Coordinate[0].timestamp.slice(0, 19))  < 3600000 ? 'active' : 'inactive',
                 };
             });
         } catch (error: any) {

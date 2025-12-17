@@ -53,10 +53,12 @@
     "leaflet-routing-machine": "^3.2.12",
     "material-react-table": "^2.0.4",
     "prettier": "^3.0.3",
+    "prom-client": "^15.1.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-leaflet": "^4.2.1",
     "react-redux": "^8.1.3",
-    "react-router-dom": "^6.21.2"
+    "react-router-dom": "^6.21.2",
+    "web-vitals": "^5.1.0"
   }
 }
